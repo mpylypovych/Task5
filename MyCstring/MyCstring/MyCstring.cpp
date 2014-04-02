@@ -3,9 +3,12 @@
 
 #include "stdafx.h"
 
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "MyCstring.h"
 
+#define ALLOC_STEP 20
 //#define EOS 0
 
 
@@ -225,4 +228,35 @@ char * my_strtok(char * str, const char * delimiters)
 	}
 
 	return temp;
+}
+
+MYCSTRING_API char * getstr(void)
+{
+	size_t length = ALLOC_STEP;
+	char * str = (char*)malloc(length);
+	size_t i = 0;
+	*(str + i) = getchar();
+	while (*(str + i) != '\n')
+	{
+		++i;
+		if (i >= length)
+		{
+			length += ALLOC_STEP;
+			str = (char*)realloc(str, length);
+		}
+		*(str + i) = getchar();
+	}
+	*(str + i) = EOS;
+	return str;
+}
+
+MYCSTRING_API size_t printstr(const char * str)
+{
+	size_t i = 0;
+	while (*(str + i) != EOS)
+	{
+		putchar(*(str + i));
+		++i;
+	}
+	return i;
 }

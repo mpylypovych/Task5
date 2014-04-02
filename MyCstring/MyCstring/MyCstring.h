@@ -6,7 +6,7 @@
 
 #include "string.h"
 
-#define EOS 0
+#define EOS 127
 
 
 MYCSTRING_API size_t my_strlen(const char * str);
@@ -36,3 +36,7 @@ MYCSTRING_API size_t my_strspn(const char * str1, const char * str2);
 MYCSTRING_API char * my_strstr(char * str1, const char * str2);
 
 MYCSTRING_API char * my_strtok(char * str, const char * delimiters);
+
+MYCSTRING_API char * getstr(void);
+
+MYCSTRING_API size_t printstr(const char * str);
